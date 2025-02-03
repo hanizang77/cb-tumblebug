@@ -248,7 +248,10 @@ func GetConfig(id string) (model.ConfigInfo, error) {
 	res := model.ConfigInfo{}
 
 	check, err := CheckConfig(id)
-	errString := id + " config is not found from Key-value store. Envirionment variable will be used."
+
+	const errMsgFormat = "%s config is not found from Key-value store. Environment variable will be used."
+	errString := fmt.Sprintf(errMsgFormat, id)
+	// errString := id + " config is not found from Key-value store. Envirionment variable will be used."
 
 	if !check {
 		err := fmt.Errorf(errString)
